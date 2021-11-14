@@ -8,7 +8,9 @@ include_once("tateti.php");
 /* Apellido, Nombre. Legajo. Carrera. mail. Usuario Github */
 /* ... COMPLETAR ... */
 
-// Orozco Iván
+// Técnicatura Universitaria en desarrollo web.
+
+// Orozco Iván FAI
 
 // Pohle Héctor FAI 3715
 
@@ -37,21 +39,30 @@ include_once("tateti.php");
 
 //Proceso:
 
-$juego = jugar();
+//$juego = jugar();
 //print_r($juego);
 //imprimirResultado($juego);
 
 
 
-/*
+
 do {
-    $opcion = ...;
+    echo "MENU DE OPCIONES: \n
+            1)- JUGAR AL TATETI.\n
+            2)- MOSTRAR UN JUEGO.\n
+            3)- MOSTRAR EL PRIMER JUEGO GANADOR.\n
+            4)- MOSTRAR PORCENTAJE DE JUEGOS GANADOS.\n
+            5)- MOSTRAR RESUMEN JUGADOR.\n
+            6)- MOSTRAR LISTADO DE JUEGOS ORDENADOS POR 0.\n
+            7)- SALIR. \n";
+    $opcion = trim(fgets(STDIN));
 
     
     switch ($opcion) {
         case 1: 
             //completar qué secuencia de pasos ejecutar si el usuario elige la opción 1
-
+            echo "Elegiste jugar al Tateti! \n";
+            $juego = jugar();
             break;
         case 2: 
             //completar qué secuencia de pasos ejecutar si el usuario elige la opción 2
@@ -61,8 +72,17 @@ do {
             //completar qué secuencia de pasos ejecutar si el usuario elige la opción 3
 
             break;
+        case 4: 
+            //completar qué secuencia de pasos ejecutar si el usuario elige la opción 4
+    
+            break;
+        case 5: 
+            //completar qué secuencia de pasos ejecutar si el usuario elige la opción 5
+    
+            break;
+        case 6: 
+            //completar qué secuencia de pasos ejecutar si el usuario elige la opción 6
         
-            //...
+            break;
     }
-} while ($opcion != X);
-*/
+} while ($opcion != 7);
