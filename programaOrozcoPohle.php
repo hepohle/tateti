@@ -11,8 +11,10 @@ include_once("tateti.php");
 // Técnicatura Universitaria en desarrollo web.
 
 // Orozco Iván FAI
+// ivan.orozco@est.fi.uncoma.edu.ar
 
 // Pohle Héctor FAI 3715
+// hector.pohle@est.fi.uncoma.edu.ar
 
 // https://github.com/hepohle/tateti
 
