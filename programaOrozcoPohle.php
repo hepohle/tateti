@@ -59,32 +59,35 @@ do {
             7)- SALIR. \n";
     $opcion = trim(fgets(STDIN));
 
-    
-    switch ($opcion) {
-        case 1: 
-            //completar qué secuencia de pasos ejecutar si el usuario elige la opción 1
-            echo "Elegiste jugar al Tateti! \n";
-            $juego = jugar();
-            break;
-        case 2: 
-            //completar qué secuencia de pasos ejecutar si el usuario elige la opción 2
+    if ($opcion < 1 || $opcion > 7){
+        echo "Ingrese una opción válida:";
+    }else{
+        switch ($opcion) {
+            case 1: 
+                //completar qué secuencia de pasos ejecutar si el usuario elige la opción 1
+                echo "Elegiste jugar al Tateti! \n";
+                $juego = jugar();
+                break;
+            case 2: 
+                //completar qué secuencia de pasos ejecutar si el usuario elige la opción 2
 
-            break;
-        case 3: 
-            //completar qué secuencia de pasos ejecutar si el usuario elige la opción 3
+                break;
+            case 3: 
+                //completar qué secuencia de pasos ejecutar si el usuario elige la opción 3
 
-            break;
-        case 4: 
-            //completar qué secuencia de pasos ejecutar si el usuario elige la opción 4
-    
-            break;
-        case 5: 
-            //completar qué secuencia de pasos ejecutar si el usuario elige la opción 5
-    
-            break;
-        case 6: 
-            //completar qué secuencia de pasos ejecutar si el usuario elige la opción 6
+                break;
+            case 4: 
+                //completar qué secuencia de pasos ejecutar si el usuario elige la opción 4
         
-            break;
+                break;
+            case 5: 
+                //completar qué secuencia de pasos ejecutar si el usuario elige la opción 5
+        
+                break;
+            case 6: 
+                //completar qué secuencia de pasos ejecutar si el usuario elige la opción 6
+            
+                break;
+        }
     }
 } while ($opcion != 7);
