@@ -22,7 +22,16 @@ include_once("tateti.php");
 /***** DEFINICION DE FUNCIONES ********/
 /**************************************/
 
-
+/**
+ * Ordena la coleccion de juegos por jugador 0.
+ * @param array $arr
+ * @return array colleccion ordenada.
+ */
+function ordenarPor0($arr){
+    foreach ($arr as $indice => $valor) {
+        
+    }
+}
 
 
 
@@ -46,8 +55,6 @@ include_once("tateti.php");
 //imprimirResultado($juego);
 
 
-
-
 do {
     echo "MENU DE OPCIONES: \n
             1)- JUGAR AL TATETI.\n
@@ -64,30 +71,35 @@ do {
     }else{
         switch ($opcion) {
             case 1: 
-                //completar qué secuencia de pasos ejecutar si el usuario elige la opción 1
+                //Inicia el juego de Tateti.
                 echo "Elegiste jugar al Tateti! \n";
                 $juego = jugar();
                 break;
             case 2: 
-                //completar qué secuencia de pasos ejecutar si el usuario elige la opción 2
+                //Muesttra un juego a partir de un numero ingresado.
 
                 break;
             case 3: 
-                //completar qué secuencia de pasos ejecutar si el usuario elige la opción 3
+                //Muestra el primer juego ganador, a partir del nombre del jugador.
 
                 break;
             case 4: 
-                //completar qué secuencia de pasos ejecutar si el usuario elige la opción 4
+                //Muestra el porcentaje de juegos ganados de "X" o "0".
         
                 break;
             case 5: 
-                //completar qué secuencia de pasos ejecutar si el usuario elige la opción 5
+                //Muestra resumen de un jugador.
         
                 break;
             case 6: 
-                //completar qué secuencia de pasos ejecutar si el usuario elige la opción 6
-            
+                //Muestra listado de juegos ordenados por jugador "0".
+                uasort($coleccionDeJuegos, 'ordenarPor0');
+                print_r($coleccionDeJuegos);
                 break;
         }
     }
-} while ($opcion != 7);
+}
+// Opción 7 sale del programa.
+while ($opcion != 7);
+
+echo "Gracias por jugar al Tateti!";

@@ -11,3 +11,8 @@ Universidad del Comahue
 
 ## Integrantes del equipo
 
+Orozco Iván FAI
+ivan.orozco@est.fi.uncoma.edu.ar
+
+Pohle Héctor FAI 3715
+hector.pohle@est.fi.uncoma.edu.ar
