@@ -159,7 +159,12 @@ function almacenarJuego($juego)
 }
 
 
-
+function nuevoJuegoGuardado($nuevoJuego){
+    $nuevoJuego = array (
+        "resultado"=> $resultado, "nombreJugadorX"=> $nombreJugadorCruz, "nombreJugadorO"=> $nombreJugadorCirculo, "puntosObtenidosX"=> $puntosCruz, "puntosObtenidosO"=> $puntosCirculo
+    );
+    $mostrarJuego[]=$nuevoJuego;
+}
 
 
 /**************************************/
