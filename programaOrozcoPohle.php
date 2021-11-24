@@ -16,6 +16,9 @@ include_once("tateti.php");
 // Pohle Héctor FAI 3715
 // hector.pohle@est.fi.uncoma.edu.ar
 
+// Salto Tomás FAI
+// tomas.salto@est.fi.uncoma.edu.ar
+
 // https://github.com/hepohle/tateti
 
 /**************************************/
@@ -23,8 +26,6 @@ include_once("tateti.php");
 /**************************************/
 
 // Carga un array con diez juegos.
-
-
 /**
  * Inicializa la estructura de datos de la coleccion de juegos.
  */
@@ -283,8 +284,7 @@ do {
                 break;
             case 6: 
                 //Muestra listado de juegos ordenados por jugador "0".
-                uasort($coleccionDeJuegos, 'ordenarPor0');
-                print_r($coleccionDeJuegos);
+                
                 break;
         }
 }

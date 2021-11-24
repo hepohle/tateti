@@ -16,3 +16,6 @@ ivan.orozco@est.fi.uncoma.edu.ar
 
 Pohle Héctor FAI 3715
 hector.pohle@est.fi.uncoma.edu.ar
+
+Salto Tomás FAI
+tomas.salto@est.fi.uncoma.edu.ar
