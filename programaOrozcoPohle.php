@@ -117,10 +117,10 @@ function mostrarJuego()
         echo "Ingrese nuevamente el juego que desea ver: ";
         $nroJuego=trim(fgets(STDIN));
     }
-}
-
-
-/**
+ }
+ 
+ 
+ /**
  * Ordena la coleccion de juegos por jugador 0.
  * @param array $arr
  * @return array colleccion ordenada.
@@ -186,7 +186,7 @@ function nuevoJuegoGuardado($nuevoJuego){
 
 
 do {
-    echo "MENU DE OPCIONES: \n
+    echo "\n MENU DE OPCIONES: \n
             1)- JUGAR AL TATETI.\n
             2)- MOSTRAR UN JUEGO.\n
             3)- MOSTRAR EL PRIMER JUEGO GANADOR.\n
@@ -232,4 +232,4 @@ do {
 // Opción 7 sale del programa.
 while ($opcion != 7);
 
-echo "Gracias por jugar al Tateti!";
+echo "\n Gracias por jugar al Tateti!\n";
