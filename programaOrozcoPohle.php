@@ -149,14 +149,26 @@ function seleccionarOpcion(){
             7)- SALIR. \n";
     $num = trim(fgets(STDIN));
 
+    $opcion = solicitarValor($num);
+    
+    return $opcion;
+}
+
+
+/**
+ * Pide al usuario un numero y comprueba si está dentro de un rango de valores.
+ * @param int $num
+ * @return int
+ */
+function solicitarValor($num){
+    $min = 1;
+    $max = 7;
     while ($num < $min || $num > $max){
-        echo "Ingrese una opcion válida (entre 1 y 7): ";
+        echo "Ingrese una opcion válida entre " . $min . " y " . $max . ": ";
         $num = trim(fgets(STDIN));
     }
     return $num;
 }
-
-
 
 /**
  * Recibe un array con la coleccion de juegos y un juego nuevo.
