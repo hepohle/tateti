@@ -231,8 +231,6 @@ function cantidaGanados($juegos){
 // Carga la collecion de 10 juegos
 $coleccionDeJuegos = cargarJuegos();
 
-
-
 //Valores del rango
 $min = 1;
 $max = 7;
