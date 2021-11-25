@@ -28,6 +28,7 @@ include_once("tateti.php");
 // Carga un array con diez juegos.
 /**
  * Inicializa la estructura de datos de la coleccion de juegos.
+ * @return array $coleccionJuegos
  */
 function cargarJuegos(){
     //array juegos cargados
@@ -107,103 +108,124 @@ function cargarJuegos(){
     $coleccionJuegos[9] = $juego10;
 };
 
-
-//Opcion numero 2 del menu (Mostrar Juego)
-function mostrarJuego()
-{
-
-    //10 array multidimencionales.
-    $mostrarJuego1= ["resultado"=>"Empate",
-                 "nombreJugadorX"=> "juanchi",
-                 "nombreJugadorO"=> "Ana",
-                 "puntosObtenidosX"=> 1,
-                 "puntosObtenidosO"=> 1];
-
-
-    $mostrarJuego2= ["resultado"=>"ganador O",
-                 "nombreJugadorX"=> "Alberto",
-                 "nombreJugadorO"=> "Kristina",
-                 "puntosObtenidosX"=> -1,
-                 "puntosObtenidosO"=> 2];
-
-    $mostrarJuego3= ["resultado"=>"ganador X",
-                 "nombreJugadorX"=> "Majo",
-                 "nombreJugadorO"=> "Pepe",
-                 "puntosObtenidosX"=> 5,
-                 "puntosObtenidosO"=> 3];
-
-    $mostrarJuego4= ["resultado"=>"Empate",
-                 "nombreJugadorX"=> "Maria",
-                 "nombreJugadorO"=> "Jose",
-                 "puntosObtenidosX"=> 3,
-                 "puntosObtenidosO"=> 3];
-            
-    $mostrarJuego5= ["resultado"=>"ganador X",
-                 "nombreJugadorX"=> "Deby",
-                 "nombreJugadorO"=> "Karen",
-                 "puntosObtenidosX"=> 6,
-                 "puntosObtenidosO"=> 3];
-
-    $mostrarJuego6= ["resultado"=>"ganador O",
-                 "nombreJugadorX"=> "Walter",
-                 "nombreJugadorO"=> "Martina",
-                 "puntosObtenidosX"=> 2,
-                 "puntosObtenidosO"=> 4];
-
-    $mostrarJuego7= ["resultado"=>"ganador X",
-                 "nombreJugadorX"=> "Alicia",
-                 "nombreJugadorO"=> "Dora",
-                 "puntosObtenidosX"=> 7,
-                 "puntosObtenidosO"=> 2];
-                 
-    $mostrarJuego8= ["resultado"=>"ganador O",
-                 "nombreJugadorX"=> "Hector",
-                 "nombreJugadorO"=> "Luis",
-                 "puntosObtenidosX"=> 1,
-                 "puntosObtenidosO"=> 2];
-              
-    $mostrarJuego9= ["resultado"=>"ganador X",
-                 "nombreJugadorX"=> "Manuel",
-                 "nombreJugadorO"=> "Jose",
-                 "puntosObtenidosX"=> 10,
-                 "puntosObtenidosO"=> 4];
-
-    $mostrarJuego10= ["resultado"=>"Empate",
-                 "nombreJugadorX"=> "Leonardo",
-                 "nombreJugadorO"=> "Ivan",
-                 "puntosObtenidosX"=> 2,
-                 "puntosObtenidosO"=> 2];
-
-
-    $mostrarJuego = [];
-    $mostrarJuego[0] =$mostrarJuego1;
-    $mostrarJuego[1] =$mostrarJuego2;
-    $mostrarJuego[2] =$mostrarJuego3;
-    $mostrarJuego[3] =$mostrarJuego4;
-    $mostrarJuego[4] =$mostrarJuego5;
-    $mostrarJuego[5] =$mostrarJuego6;
-    $mostrarJuego[6] =$mostrarJuego7;
-    $mostrarJuego[7] =$mostrarJuego8;
-    $mostrarJuego[8] =$mostrarJuego9;
-    $mostrarJuego[9] =$mostrarJuego10;
-
-    //contador de los juegos guardados en el array $mostrarJuego
-    $cantJuegos = count($mostrarJuego); 
+/**
+ * Pide al usuario un numero de juego y muestra su resumen.
+ * @param array $coleccionJuegos
+ * @return array $juegoElegido
+ */
+function mostrarJuego($coleccionDeJuegos){
+    $cantidadDeJuegos = count($coleccionDeJuegos);
 
     echo "Ingrese el numero del juego que desea ver: ";
-    $nroJuego=trim(fgets(STDIN));
+    $num=trim(fgets(STDIN));
 
-    //si ingresa un numero valido, le muestra los datos, sino le pide que ingrese nuevamente un numero
-    if ($nroJuego>=0 && $nroJuego<$cantJuegos){
-        echo "JUEGO TATETI N°: ".$nroJuego." ".$mostrarJuego[$nroJuego]["resultado"]."\n";
-        echo "JUGADOR X: ".$mostrarJuego[$nroJuego]["nombreJugadorX"]." obtuvo ".$mostrarJuego[$nroJuego]["puntosObtenidosX"]." punto."."\n";
-        echo "JUGADOR O: ".$mostrarJuego[$nroJuego]["nombreJugadorO"]." obtuvo ".$mostrarJuego[$nroJuego]["puntosObtenidosO"]." punto."."\n";
+    if ($num >=0 && $num < $cantidadDeJuegos){
+        echo "JUEGO TATETI N°: ".$num." ".$coleccionDeJuegos[$num]["resultado"]."\n";
+        echo "JUGADOR X: ".$coleccionDeJuegos[$num]["nombreJugadorX"]." obtuvo ".$coleccionDeJuegos[$num]["puntosObtenidosX"]." punto."."\n";
+        echo "JUGADOR O: ".$coleccionDeJuegos[$num]["nombreJugadorO"]." obtuvo ".$coleccionDeJuegos[$num]["puntosObtenidosO"]." punto."."\n";
     }else{
         echo"Error, ese juego no existe!\n";
         echo "Ingrese nuevamente el juego que desea ver: ";
-        $nroJuego=trim(fgets(STDIN));
+        $num=trim(fgets(STDIN));
     }
 }
+
+// //Opcion numero 2 del menu (Mostrar Juego)
+// function mostrarJuego()
+// {
+
+//     //10 array multidimencionales.
+//     $mostrarJuego1= ["resultado"=>"Empate",
+//                  "nombreJugadorX"=> "juanchi",
+//                  "nombreJugadorO"=> "Ana",
+//                  "puntosObtenidosX"=> 1,
+//                  "puntosObtenidosO"=> 1];
+
+
+//     $mostrarJuego2= ["resultado"=>"ganador O",
+//                  "nombreJugadorX"=> "Alberto",
+//                  "nombreJugadorO"=> "Kristina",
+//                  "puntosObtenidosX"=> -1,
+//                  "puntosObtenidosO"=> 2];
+
+//     $mostrarJuego3= ["resultado"=>"ganador X",
+//                  "nombreJugadorX"=> "Majo",
+//                  "nombreJugadorO"=> "Pepe",
+//                  "puntosObtenidosX"=> 5,
+//                  "puntosObtenidosO"=> 3];
+
+//     $mostrarJuego4= ["resultado"=>"Empate",
+//                  "nombreJugadorX"=> "Maria",
+//                  "nombreJugadorO"=> "Jose",
+//                  "puntosObtenidosX"=> 3,
+//                  "puntosObtenidosO"=> 3];
+            
+//     $mostrarJuego5= ["resultado"=>"ganador X",
+//                  "nombreJugadorX"=> "Deby",
+//                  "nombreJugadorO"=> "Karen",
+//                  "puntosObtenidosX"=> 6,
+//                  "puntosObtenidosO"=> 3];
+
+//     $mostrarJuego6= ["resultado"=>"ganador O",
+//                  "nombreJugadorX"=> "Walter",
+//                  "nombreJugadorO"=> "Martina",
+//                  "puntosObtenidosX"=> 2,
+//                  "puntosObtenidosO"=> 4];
+
+//     $mostrarJuego7= ["resultado"=>"ganador X",
+//                  "nombreJugadorX"=> "Alicia",
+//                  "nombreJugadorO"=> "Dora",
+//                  "puntosObtenidosX"=> 7,
+//                  "puntosObtenidosO"=> 2];
+                 
+//     $mostrarJuego8= ["resultado"=>"ganador O",
+//                  "nombreJugadorX"=> "Hector",
+//                  "nombreJugadorO"=> "Luis",
+//                  "puntosObtenidosX"=> 1,
+//                  "puntosObtenidosO"=> 2];
+              
+//     $mostrarJuego9= ["resultado"=>"ganador X",
+//                  "nombreJugadorX"=> "Manuel",
+//                  "nombreJugadorO"=> "Jose",
+//                  "puntosObtenidosX"=> 10,
+//                  "puntosObtenidosO"=> 4];
+
+//     $mostrarJuego10= ["resultado"=>"Empate",
+//                  "nombreJugadorX"=> "Leonardo",
+//                  "nombreJugadorO"=> "Ivan",
+//                  "puntosObtenidosX"=> 2,
+//                  "puntosObtenidosO"=> 2];
+
+
+//     $mostrarJuego = [];
+//     $mostrarJuego[0] =$mostrarJuego1;
+//     $mostrarJuego[1] =$mostrarJuego2;
+//     $mostrarJuego[2] =$mostrarJuego3;
+//     $mostrarJuego[3] =$mostrarJuego4;
+//     $mostrarJuego[4] =$mostrarJuego5;
+//     $mostrarJuego[5] =$mostrarJuego6;
+//     $mostrarJuego[6] =$mostrarJuego7;
+//     $mostrarJuego[7] =$mostrarJuego8;
+//     $mostrarJuego[8] =$mostrarJuego9;
+//     $mostrarJuego[9] =$mostrarJuego10;
+
+//     //contador de los juegos guardados en el array $mostrarJuego
+//     $cantJuegos = count($mostrarJuego); 
+
+//     echo "Ingrese el numero del juego que desea ver: ";
+//     $nroJuego=trim(fgets(STDIN));
+
+//     //si ingresa un numero valido, le muestra los datos, sino le pide que ingrese nuevamente un numero
+//     if ($nroJuego>=0 && $nroJuego<$cantJuegos){
+//         echo "JUEGO TATETI N°: ".$nroJuego." ".$mostrarJuego[$nroJuego]["resultado"]."\n";
+//         echo "JUGADOR X: ".$mostrarJuego[$nroJuego]["nombreJugadorX"]." obtuvo ".$mostrarJuego[$nroJuego]["puntosObtenidosX"]." punto."."\n";
+//         echo "JUGADOR O: ".$mostrarJuego[$nroJuego]["nombreJugadorO"]." obtuvo ".$mostrarJuego[$nroJuego]["puntosObtenidosO"]." punto."."\n";
+//     }else{
+//         echo"Error, ese juego no existe!\n";
+//         echo "Ingrese nuevamente el juego que desea ver: ";
+//         $nroJuego=trim(fgets(STDIN));
+//     }
+// }
 
 /**
  * Le pide al usuario un número dentro del rango de las opciones del menu.
@@ -222,6 +244,7 @@ function seleccionarOpcion(){
 
     if ($opcion < 1 || $opcion > 7){
         echo "Ingrese una opción válida:";
+        $opcion = trim(fgets(STDIN));
     }
     return $opcion;
 }
@@ -244,6 +267,11 @@ function agregarJuego($coleccionDeJuegos, $nuevoJuego){
 
 //Declaración de variables:
 
+// Carga la collecion de 10 juegos
+$coleccionDeJuegos = cargarJuegos();
+
+// Opcion del menu
+$opcion = seleccionarOpcion();
 
 
 //Inicialización de variables:
@@ -255,11 +283,10 @@ function agregarJuego($coleccionDeJuegos, $nuevoJuego){
 //print_r($juego);
 //imprimirResultado($juego);
 
-// Carga la collecion de 10 juegos
-$coleccionJuegos = cargarJuegos();
+
 
 do {
-    $opcion = seleccionarOpcion();
+    
         switch ($opcion) {
             case 1: 
                 //Inicia el juego de Tateti.
@@ -268,7 +295,9 @@ do {
                 break;
             case 2: 
                 //Muesttra un juego a partir de un numero ingresado.
-                mostrarJuego();
+                print_r($coleccionDeJuegos);
+                mostrarJuego($coleccionDeJuegos);
+
                 break;
             case 3: 
                 //Muestra el primer juego ganador, a partir del nombre del jugador.
