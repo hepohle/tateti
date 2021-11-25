@@ -147,9 +147,8 @@ function seleccionarOpcion(){
             5)- MOSTRAR RESUMEN JUGADOR.\n
             6)- MOSTRAR LISTADO DE JUEGOS ORDENADOS POR 0.\n
             7)- SALIR. \n";
-    $num = trim(fgets(STDIN));
-
-    $opcion = solicitarValor($num);
+    
+    $opcion = solicitarValor($min, $max);
     
     return $opcion;
 }
@@ -160,9 +159,9 @@ function seleccionarOpcion(){
  * @param int $num
  * @return int
  */
-function solicitarValor($num){
-    $min = 1;
-    $max = 7;
+function solicitarValor($min, $max){
+    echo "Ingrese una opción: ";
+    $num = trim(fgets(STDIN));
     while ($num < $min || $num > $max){
         echo "Ingrese una opcion válida entre " . $min . " y " . $max . ": ";
         $num = trim(fgets(STDIN));
@@ -182,6 +181,44 @@ function agregarJuego($coleccionDeJuegos, $nuevoJuego){
     return $coleccionDeJuegos;
 }
 
+/**
+ * Solicita un simbolo X ó O y lo devuelve.
+ * @return string
+ */
+function simboloElegido(){
+    echo "Ingrese X ó O: ";
+    $simbolo = trim(fgets(STDIN));
+    $simbolo = strtoupper($simbolo);
+
+    if($simbolo == "X" || $simbolo == "O"){
+        $simboloUsuario = $simbolo;
+    }else{
+        echo "Ingrese un símbolo válido X ó O: ";
+        $simbolo = trim(fgets(STDIN));
+        $simbolo = strtoupper($simbolo);
+    }
+    return $simboloUsuario;
+}
+
+/**
+ * Recibe la coleccion de juegos y devuelve la cantida de juegos ganados.
+ * @param array $coleccionDeJuegos
+ * 
+ */
+function cantidaGanados($juegos){
+    $juegosGanados = 0;
+    foreach ($juegos as $indice => $valor) {
+        foreach ($valor as $key => $value) {
+            if ($key == "resultado" && $value == "ganador X"){
+                $juegosGanados ++;
+            }
+            if ($key == "resultado" && $value == "ganador O"){
+                $juegosGanados ++;
+            }
+        }
+    }
+    return $juegosGanados;
+}
 
 /**************************************/
 /*********** PROGRAMA PRINCIPAL *******/
@@ -194,8 +231,11 @@ function agregarJuego($coleccionDeJuegos, $nuevoJuego){
 // Carga la collecion de 10 juegos
 $coleccionDeJuegos = cargarJuegos();
 
-// Opcion del menu
-$opcion = seleccionarOpcion();
+
+
+//Valores del rango
+$min = 1;
+$max = 7;
 
 //Proceso:
 
@@ -204,7 +244,8 @@ $opcion = seleccionarOpcion();
 //imprimirResultado($juego);
 
 do {
-    
+    // Opcion del menu
+    $opcion = seleccionarOpcion();
         switch ($opcion) {
             case 1: 
                 //Inicia el juego de Tateti.
@@ -213,7 +254,7 @@ do {
                 break;
             case 2: 
                 //Muesttra un juego a partir de un numero ingresado.
-                mostrarJuego($coleccionDeJuegos);
+                $juegoElegido = mostrarJuego($coleccionDeJuegos);
                 break;
             case 3: 
                 //Muestra el primer juego ganador, a partir del nombre del jugador.
@@ -221,7 +262,7 @@ do {
                 break;
             case 4: 
                 //Muestra el porcentaje de juegos ganados de "X" o "0".
-        
+                
                 break;
             case 5: 
                 //Muestra resumen de un jugador.
