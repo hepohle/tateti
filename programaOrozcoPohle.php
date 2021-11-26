@@ -237,12 +237,23 @@ function primerJuegoGanado($juegos){
     return $juegoGanado;
 }
 
+/**
+ * A partir de la coleccion de juegos se pide un nombre de un jugador y se devuelve su resumen.
+ * 
+ */
 function resumenJugador($juegos){
     echo "ingrese el nombre del jugador: ";
-    $nombreJugador = trim(fgets(STDIN));
+    $nombreJugador = strtoupper(trim(fgets(STDIN)));
+    $partidosGanados = 0;
+    $partidosPerdidos = 0;
+    $partidosEmpatados = 0;
+    $puntosAcumulados = 0;
 
     foreach ($juegos as $indice => $juego) {
-        
+        if($juego["nombreJugadorX"] == $nombreJugador || $juego["nombreJugadorO"] == $nombreJugador){
+            
+        }
+
     }
 
 }
