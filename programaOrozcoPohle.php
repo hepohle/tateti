@@ -34,63 +34,63 @@ function cargarJuegos(){
     //array juegos cargados
 
     $juego1 = [
-    "nombreJugadorX"=> "juanchi",
-    "nombreJugadorO"=> "Ana",
+    "nombreJugadorX"=> "JUANCHI",
+    "nombreJugadorO"=> "ANA",
     "puntosObtenidosX"=> 1,
     "puntosObtenidosO"=> 1];
 
 
     $juego2 = [
-        "nombreJugadorX"=> "Alberto",
-        "nombreJugadorO"=> "Kristina",
+        "nombreJugadorX"=> "ALBERTO",
+        "nombreJugadorO"=> "KRISTINA",
         "puntosObtenidosX"=> -1,
         "puntosObtenidosO"=> 2];
 
     $juego3 = [
-        "nombreJugadorX"=> "Majo",
-        "nombreJugadorO"=> "Pepe",
+        "nombreJugadorX"=> "MAJO",
+        "nombreJugadorO"=> "PEPE",
         "puntosObtenidosX"=> 5,
         "puntosObtenidosO"=> 3];
 
     $juego4 = [
-        "nombreJugadorX"=> "Maria",
-        "nombreJugadorO"=> "Jose",
+        "nombreJugadorX"=> "MARIA",
+        "nombreJugadorO"=> "JOSE",
         "puntosObtenidosX"=> 3,
         "puntosObtenidosO"=> 3];
 
     $juego5 = [
-        "nombreJugadorX"=> "Deby",
-        "nombreJugadorO"=> "Karen",
+        "nombreJugadorX"=> "DEBY",
+        "nombreJugadorO"=> "KAREN",
         "puntosObtenidosX"=> 6,
         "puntosObtenidosO"=> 3];
 
     $juego6 = [
-        "nombreJugadorX"=> "Walter",
-        "nombreJugadorO"=> "Martina",
+        "nombreJugadorX"=> "WALTER",
+        "nombreJugadorO"=> "MARTINA",
         "puntosObtenidosX"=> 2,
         "puntosObtenidosO"=> 4];
 
     $juego7 = [
-        "nombreJugadorX"=> "Alicia",
-        "nombreJugadorO"=> "Dora",
+        "nombreJugadorX"=> "ALICIA",
+        "nombreJugadorO"=> "DORA",
         "puntosObtenidosX"=> 7,
         "puntosObtenidosO"=> 2];
         
     $juego8 = [
-        "nombreJugadorX"=> "Hector",
-        "nombreJugadorO"=> "Luis",
+        "nombreJugadorX"=> "HECTOR",
+        "nombreJugadorO"=> "LUIS",
         "puntosObtenidosX"=> 1,
         "puntosObtenidosO"=> 2];
     
     $juego9 = [
-        "nombreJugadorX"=> "Manuel",
-        "nombreJugadorO"=> "Jose",
+        "nombreJugadorX"=> "MANUEL",
+        "nombreJugadorO"=> "JOSE",
         "puntosObtenidosX"=> 10,
         "puntosObtenidosO"=> 4];
 
     $juego10 = [
-        "nombreJugadorX"=> "Leonardo",
-        "nombreJugadorO"=> "Ivan",
+        "nombreJugadorX"=> "LEONARDO",
+        "nombreJugadorO"=> "IVAN",
         "puntosObtenidosX"=> 2,
         "puntosObtenidosO"=> 2];
 
@@ -111,6 +111,7 @@ function cargarJuegos(){
 };
 
 /**
+ * Calcula el resultado a partir de los puntos de cada jugador.
  * 
  */
 function resultadoJuego($juego){
@@ -138,7 +139,7 @@ function mostrarJuego($coleccionDeJuegos){
     $resultado = resultadoJuego($coleccionDeJuegos[$num]);
 
     if ($num >=0 && $num <= $cantidadDeJuegos){
-        echo "JUEGO TATETI N°: ".$num." " . $resultado ."\n";
+        echo "JUEGO TATETI N°: ".$num." " . "(".$resultado.")" ."\n";
         echo "JUGADOR X: ".$coleccionDeJuegos[$num]["nombreJugadorX"]." obtuvo ".$coleccionDeJuegos[$num]["puntosObtenidosX"]." punto."."\n";
         echo "JUGADOR O: ".$coleccionDeJuegos[$num]["nombreJugadorO"]." obtuvo ".$coleccionDeJuegos[$num]["puntosObtenidosO"]." punto."."\n";
     }else{
@@ -217,10 +218,42 @@ function cantidadGanados($juegos){
 }
 
 /**
+ * Muestra el primer juego ganado a partir del nombre del jugador
+ * @return array
+ */
+function primerJuegoGanado($juegos){
+    echo "Ingrese el nombre del jugador: ";
+    $nombreJugador = strtoupper(trim(fgets(STDIN)));
+    
+    foreach ($juegos as $indice => $juego) {
+        if ($juego["nombreJugadorX"] == $nombreJugador && $juego["puntosObtenidosX"] > $juego["puntosObtenidosO"]){
+            $juegoGanado = $juego;
+        }elseif ($juego["nombreJugadorO"] == $nombreJugador && $juego["puntosObtenidosO"] > $juego["puntosObtenidosX"]) {
+            $juegoGanado = $juego;
+        }else {
+            $juegoGanado = [];
+        }
+    }
+    return $juegoGanado;
+}
+
+function resumenJugador($juegos){
+    echo "ingrese el nombre del jugador: ";
+    $nombreJugador = trim(fgets(STDIN));
+
+    foreach ($juegos as $indice => $juego) {
+        
+    }
+
+}
+
+/**
  * A partir de la colleccion de juegos, ordena los juegos
  */
-function ordenarPorO($coleccionDeJuegos){
-
+function ordenarPorO($juegos){
+    foreach ($juegos as $indice => $juego) {
+        
+    }
 }
 
 
@@ -260,7 +293,13 @@ do {
                 break;
             case 3: 
                 //Muestra el primer juego ganador, a partir del nombre del jugador.
-                
+                $juegoGanador = primerJuegoGanado($coleccionDeJuegos);
+                print_r($juegoGanador);
+                // if ($juegoGanador == []) {
+                //     echo "Ese jugador no ha gando ningún juego aún.\n";
+                // }else{
+                //     echo $juegoGanador;
+                // }
                 break;
             case 4: 
                 //Muestra el porcentaje de juegos ganados de "X" o "0".
