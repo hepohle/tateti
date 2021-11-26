@@ -33,62 +33,62 @@ include_once("tateti.php");
 function cargarJuegos(){
     //array juegos cargados
 
-    $juego1 = ["resultado"=>"Empate",
+    $juego1 = [
     "nombreJugadorX"=> "juanchi",
     "nombreJugadorO"=> "Ana",
     "puntosObtenidosX"=> 1,
     "puntosObtenidosO"=> 1];
 
 
-    $juego2 = ["resultado"=>"ganador O",
+    $juego2 = [
         "nombreJugadorX"=> "Alberto",
         "nombreJugadorO"=> "Kristina",
         "puntosObtenidosX"=> -1,
         "puntosObtenidosO"=> 2];
 
-    $juego3 = ["resultado"=>"ganador X",
+    $juego3 = [
         "nombreJugadorX"=> "Majo",
         "nombreJugadorO"=> "Pepe",
         "puntosObtenidosX"=> 5,
         "puntosObtenidosO"=> 3];
 
-    $juego4 = ["resultado"=>"Empate",
+    $juego4 = [
         "nombreJugadorX"=> "Maria",
         "nombreJugadorO"=> "Jose",
         "puntosObtenidosX"=> 3,
         "puntosObtenidosO"=> 3];
 
-    $juego5 = ["resultado"=>"ganador X",
+    $juego5 = [
         "nombreJugadorX"=> "Deby",
         "nombreJugadorO"=> "Karen",
         "puntosObtenidosX"=> 6,
         "puntosObtenidosO"=> 3];
 
-    $juego6 = ["resultado"=>"ganador O",
+    $juego6 = [
         "nombreJugadorX"=> "Walter",
         "nombreJugadorO"=> "Martina",
         "puntosObtenidosX"=> 2,
         "puntosObtenidosO"=> 4];
 
-    $juego7 = ["resultado"=>"ganador X",
+    $juego7 = [
         "nombreJugadorX"=> "Alicia",
         "nombreJugadorO"=> "Dora",
         "puntosObtenidosX"=> 7,
         "puntosObtenidosO"=> 2];
         
-    $juego8 = ["resultado"=>"ganador O",
+    $juego8 = [
         "nombreJugadorX"=> "Hector",
         "nombreJugadorO"=> "Luis",
         "puntosObtenidosX"=> 1,
         "puntosObtenidosO"=> 2];
     
-    $juego9 = ["resultado"=>"ganador X",
+    $juego9 = [
         "nombreJugadorX"=> "Manuel",
         "nombreJugadorO"=> "Jose",
         "puntosObtenidosX"=> 10,
         "puntosObtenidosO"=> 4];
 
-    $juego10 = ["resultado"=>"Empate",
+    $juego10 = [
         "nombreJugadorX"=> "Leonardo",
         "nombreJugadorO"=> "Ivan",
         "puntosObtenidosX"=> 2,
@@ -111,18 +111,34 @@ function cargarJuegos(){
 };
 
 /**
+ * 
+ */
+function resultadoJuego($juego){
+    if ($juego["puntosObtenidosX"] > $juego["puntosObtenidosO"]) {
+        $resultado = "GANO JUGADOR X";
+    } elseif ($juego["puntosObtenidosX"] < $juego["puntosObtenidosO"]) {
+        $resultado = "GANO JUGADOR O";
+    } else {
+        $resultado = "EMPATE";
+    }
+    return $resultado;
+}
+
+/**
  * Pide al usuario un numero de juego y muestra su resumen.
  * @param array $coleccionJuegos
  * 
  */
 function mostrarJuego($coleccionDeJuegos){
     $cantidadDeJuegos = count($coleccionDeJuegos);
-
+    
     echo "Ingrese el numero del juego que desea ver: ";
     $num=trim(fgets(STDIN));
 
+    $resultado = resultadoJuego($coleccionDeJuegos[$num]);
+
     if ($num >=0 && $num <= $cantidadDeJuegos){
-        echo "JUEGO TATETI N°: ".$num." ".$coleccionDeJuegos[$num]["resultado"]."\n";
+        echo "JUEGO TATETI N°: ".$num." " . $resultado ."\n";
         echo "JUGADOR X: ".$coleccionDeJuegos[$num]["nombreJugadorX"]." obtuvo ".$coleccionDeJuegos[$num]["puntosObtenidosX"]." punto."."\n";
         echo "JUGADOR O: ".$coleccionDeJuegos[$num]["nombreJugadorO"]." obtuvo ".$coleccionDeJuegos[$num]["puntosObtenidosO"]." punto."."\n";
     }else{
@@ -134,6 +150,7 @@ function mostrarJuego($coleccionDeJuegos){
 
 /**
  * Le pide al usuario un número dentro del rango de las opciones del menu.
+ * Se llama a la funcion solicitarNumeroEntre() del archivo tateti.php
  * @return int $opcion.
  */
 function seleccionarOpcion(){
@@ -148,25 +165,9 @@ function seleccionarOpcion(){
             6)- MOSTRAR LISTADO DE JUEGOS ORDENADOS POR 0.\n
             7)- SALIR. \n";
     
-    $opcion = solicitarValor($min, $max);
+    $opcion = solicitarNumeroEntre($min, $max);
     
     return $opcion;
-}
-
-
-/**
- * Pide al usuario un numero y comprueba si está dentro de un rango de valores.
- * @param int $num
- * @return int
- */
-function solicitarValor($min, $max){
-    echo "Ingrese una opción: ";
-    $num = trim(fgets(STDIN));
-    while ($num < $min || $num > $max){
-        echo "Ingrese una opcion válida entre " . $min . " y " . $max . ": ";
-        $num = trim(fgets(STDIN));
-    }
-    return $num;
 }
 
 /**
@@ -182,7 +183,7 @@ function agregarJuego($coleccionDeJuegos, $nuevoJuego){
 }
 
 /**
- * Solicita un simbolo X ó O y lo devuelve.
+ * Solicita un simbolo X ó O valida que lo ingresado sea correcto y lo devuelve.
  * @return string
  */
 function simboloElegido(){
@@ -205,20 +206,23 @@ function simboloElegido(){
  * @param array $coleccionDeJuegos
  * 
  */
-function cantidaGanados($juegos){
+function cantidadGanados($juegos){
     $juegosGanados = 0;
-    foreach ($juegos as $indice => $valor) {
-        foreach ($valor as $key => $value) {
-            if ($key == "resultado" && $value == "ganador X"){
-                $juegosGanados ++;
-            }
-            if ($key == "resultado" && $value == "ganador O"){
-                $juegosGanados ++;
-            }
+    foreach ($juegos as $indice => $juego) {
+        if($juego["puntosObtenidosX"] <> $juego["puntosObtenidosO"]){
+                    $juegosGanados ++;
         }
     }
     return $juegosGanados;
 }
+
+/**
+ * A partir de la colleccion de juegos, ordena los juegos
+ */
+function ordenarPorO($coleccionDeJuegos){
+
+}
+
 
 /**************************************/
 /*********** PROGRAMA PRINCIPAL *******/
