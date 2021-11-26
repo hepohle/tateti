@@ -251,7 +251,7 @@ function resumenJugador($juegos){
 
     foreach ($juegos as $indice => $juego) {
         if($juego["nombreJugadorX"] == $nombreJugador || $juego["nombreJugadorO"] == $nombreJugador){
-            
+
         }
 
     }
@@ -285,9 +285,12 @@ $max = 7;
 
 //Proceso:
 
-//$juego = jugar();
-//print_r($juego);
-//imprimirResultado($juego);
+// $juego = jugar();
+// print_r($juego);
+// imprimirResultado($juego);
+
+// $coleccionDeJuegos = agregarJuego($coleccionDeJuegos, $juego);
+// print_r($coleccionDeJuegos);
 
 do {
     // Opcion del menu
@@ -297,6 +300,10 @@ do {
                 //Inicia el juego de Tateti.
                 echo "Elegiste jugar al Tateti! \n";
                 $juego = jugar();
+                imprimirResultado($juego);
+
+                $coleccionDeJuegos = agregarJuego($coleccionDeJuegos, $juego);
+                print_r($coleccionDeJuegos);
                 break;
             case 2: 
                 //Muesttra un juego a partir de un numero ingresado.
