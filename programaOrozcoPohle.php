@@ -280,13 +280,21 @@ function resumenJugador($juegos){
             }
         
     }
-    echo "******************************\n";
-    echo "JUGADOR: " . $nombreJugador . "\n";
-    echo "Gano: " . $partidosGanados . " juegos.\n";
-    echo "Perdió: " . $partidosPerdidos . " juegos.\n";
-    echo "Empató: " . $partidosEmpatados . " juegos.\n";
-    echo "Total de puntos acumulados: " . $puntosAcumulados . " puntos. \n";
-    echo "******************************\n";
+    $partidosJugados = $partidosGanados + $partidosPerdidos + $partidosEmpatados;
+
+    if ($partidosJugados == 0) {
+        echo "******************************\n";
+        echo "Ese jugador todavía no jugó ningun partido.\n";
+        echo "******************************\n";
+    }else {
+        echo "******************************\n";
+        echo "JUGADOR: " . $nombreJugador . "\n";
+        echo "Gano: " . $partidosGanados . " juegos.\n";
+        echo "Perdió: " . $partidosPerdidos . " juegos.\n";
+        echo "Empató: " . $partidosEmpatados . " juegos.\n";
+        echo "Total de puntos acumulados: " . $puntosAcumulados . " puntos. \n";
+        echo "******************************\n";
+    }    
 }
 
 // /**
