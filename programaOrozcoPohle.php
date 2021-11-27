@@ -139,9 +139,11 @@ function mostrarJuego($coleccionDeJuegos){
     $resultado = resultadoJuego($coleccionDeJuegos[$num]);
 
     if ($num >=0 && $num <= $cantidadDeJuegos){
+        echo "******************************\n";
         echo "JUEGO TATETI N°: ".$num." " . "(".$resultado.")" ."\n";
         echo "JUGADOR X: ".$coleccionDeJuegos[$num]["nombreJugadorX"]." obtuvo ".$coleccionDeJuegos[$num]["puntosObtenidosX"]." punto."."\n";
         echo "JUGADOR O: ".$coleccionDeJuegos[$num]["nombreJugadorO"]." obtuvo ".$coleccionDeJuegos[$num]["puntosObtenidosO"]." punto."."\n";
+        echo "******************************\n";
     }else{
         echo"Error, ese juego no existe!\n";
         echo "Ingrese nuevamente el juego que desea ver: ";
@@ -188,7 +190,7 @@ function agregarJuego($coleccionDeJuegos, $nuevoJuego){
  * @return string
  */
 function simboloElegido(){
-    echo "Ingrese X ó O: ";
+    echo "Ingrese un símbolo (X ó O): ";
     $simbolo = trim(fgets(STDIN));
     $simbolo = strtoupper($simbolo);
 
@@ -267,6 +269,32 @@ function ordenarPorO($juegos){
     }
 }
 
+/**
+ * Pide un simbolo (X ó O) y recorre la coleccion de juegos, devuelve el porcentaje de juegos ganados.
+ * @return int
+ */
+function porcentajeGanados($juegos){
+    $juegosPorSimbolo = 0;
+    $total = count($juegos);
+    $simbolo = simboloElegido();
+    
+    foreach ($juegos as $indice => $juego) {
+        if ($simbolo == "X"){
+            if (resultadoJuego($juego) == "GANO JUGADOR X") {
+                $juegosPorSimbolo ++;
+            }
+        }
+        if ($simbolo == "O"){
+            if (resultadoJuego($juego) == "GANO JUGADOR O") {
+                $juegosPorSimbolo ++;
+            }
+        }
+    }
+    $porcentaje = ($juegosPorSimbolo * 100) / $total;
+    echo "El porcentaje de juegos ganador por " . $simbolo . " es " . $porcentaje . "%\n";
+}
+
+
 
 /**************************************/
 /*********** PROGRAMA PRINCIPAL *******/
@@ -287,10 +315,6 @@ $max = 7;
 
 // $juego = jugar();
 // print_r($juego);
-// imprimirResultado($juego);
-
-// $coleccionDeJuegos = agregarJuego($coleccionDeJuegos, $juego);
-// print_r($coleccionDeJuegos);
 
 do {
     // Opcion del menu
@@ -321,7 +345,7 @@ do {
                 break;
             case 4: 
                 //Muestra el porcentaje de juegos ganados de "X" o "0".
-                
+                porcentajeGanados($coleccionDeJuegos);
                 break;
             case 5: 
                 //Muestra resumen de un jugador.
