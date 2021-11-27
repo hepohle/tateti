@@ -39,7 +39,6 @@ function cargarJuegos(){
     "puntosObtenidosX"=> 1,
     "puntosObtenidosO"=> 1];
 
-
     $juego2 = [
         "nombreJugadorX"=> "ALBERTO",
         "nombreJugadorO"=> "KRISTINA",
@@ -245,20 +244,116 @@ function primerJuegoGanado($juegos){
  */
 function resumenJugador($juegos){
     echo "ingrese el nombre del jugador: ";
-    $nombreJugador = strtoupper(trim(fgets(STDIN)));
+    $nombreJugador = trim(fgets(STDIN));
+    $nombreJugador = strtoupper($nombreJugador);
     $partidosGanados = 0;
     $partidosPerdidos = 0;
     $partidosEmpatados = 0;
     $puntosAcumulados = 0;
 
-    foreach ($juegos as $indice => $juego) {
-        if($juego["nombreJugadorX"] == $nombreJugador || $juego["nombreJugadorO"] == $nombreJugador){
-
-        }
-
+    foreach ($juegos as $juego) {
+        
+            if($juego["nombreJugadorX"] == $nombreJugador){ 
+                if (resultadoJuego($juego) == "GANO JUGADOR X"){ 
+                    $partidosGanados ++;
+                    $puntosAcumulados = $puntosAcumulados + $juego["puntosObtenidosX"];
+                }elseif (resultadoJuego($juego) == "GANO JUGADOR O") {
+                    $partidosPerdidos ++;    
+                }else {
+                    $partidosEmpatados ++;
+                    $puntosAcumulados = $puntosAcumulados + $juego["puntosObtenidosX"];
+                }
+            }elseif ($juego["nombreJugadorO"] == $nombreJugador){
+                if(resultadoJuego($juego) == "GANO JUGADOR O") {
+                    $partidosGanados ++;
+                    $puntosAcumulados = $puntosAcumulados + $juego["puntosObtenidosO"];
+                }elseif (resultadoJuego($juego) == "GANO JUGADOR X") {
+                    $partidosPerdidos ++;
+                }else {
+                    $partidosEmpatados ++;
+                    $puntosAcumulados = $puntosAcumulados + $juego["puntosObtenidosO"];
+                }
+            // }elseif ($juego["nombreJugadorX"] <> $nombreJugador) {
+            //      echo "Ese jugador no jugó todavía.\n";
+            //      echo "ingrese el nombre del jugador: ";
+            //      $nombreJugador = strtoupper(trim(fgets(STDIN))); 
+            }
+        
     }
-
+    echo "******************************\n";
+    echo "JUGADOR: " . $nombreJugador . "\n";
+    echo "Gano: " . $partidosGanados . " juegos.\n";
+    echo "Perdió: " . $partidosPerdidos . " juegos.\n";
+    echo "Empató: " . $partidosEmpatados . " juegos.\n";
+    echo "Total de puntos acumulados: " . $puntosAcumulados . " puntos. \n";
+    echo "******************************\n";
 }
+
+// /**
+//  * A partir de la coleccion de juegos se pide un nombre de un jugador y se devuelve su resumen.
+//  * @param array $coleccionJuegos
+//  */
+// function resumenJugador($coleccionJuegos)
+// {
+//     echo "ingrese el nombre del jugador: ";
+//     $nombreJugador = strtoupper(trim(fgets(STDIN)));
+
+//     $partidosGanados = 0;
+//     $partidosPerdidos = 0;
+//     $partidosEmpatados = 0;
+//     $puntosAcumulados = 0;
+
+//     //recorre el array $coleecionJuegos , vuelca todos los arreglos en $juegos
+//     foreach($coleccionJuegos as $juegos)
+//     {
+//         /*recorre  el array $juegos
+//         que serian los valores de los mismos valores que el array principal
+//         $juegos("nombreJugadorX","nombreJugadorO","puntosObtenidosX","puntosObtenidosO")
+//         esos valores de juego los vuelca en $datos*/ 
+//         foreach($juegos as  $posicionDatosJuego => $datos)/* toma la posicion del array y el dato en esa posicion*/
+//         {
+//             //comparar si el nombre ingresado por el usario es el mismo del arreglo
+//             if($datos==$nombreJugador)
+//             {
+//                 if($posicionDatosJuego == "nombreJugadorX")
+//                 {
+//                     //llamar a la funcion, que determina quien gano X o O
+//                     $resultado = resultadoJuego($datos);/*se envian por parametro los $datos */
+//                     //llama a la funcion determinarPuntos, para que determine los puntos (gano, perdio, empate)
+//                     if ($resultado = "GANO JUGADOR X"){
+//                         $partidosGanados =  $partidosGanados + 1;
+//                         $puntosAcumulados = $puntosAcumulados+$datos["puntosObtenidosX"];
+//                     }elseif ($resultado = "GANO JUGADOR O"){
+//                         $partidosPerdidos = $partidosPerdidos + 1;
+//                     }else{
+//                         $partidosEmpatados=$partidosEmpatados + 1;
+//                     }
+//                 }
+//                 else($posicionDatosJuego == "nombreJugadorO")
+//                 {
+//                     $resultado = resultadoJuego($datos);
+//                     if ($resultado = "GANO JUGADOR O"){
+//                         $partidosGanados =  $partidosGanados + 1;
+//                         $puntosAcumulados = $puntosAcumulados+ $datos["puntosObtenidosO"];
+//                     }elseif ($resultado = "GANO JUGADOR X"){
+//                         $partidosPerdidos = $partidosPerdidos + 1;
+//                     }else{
+//                         $partidosEmpatados=$partidosEmpatados + 1;
+//                     }
+//                 }
+        
+//             }else{
+//                 echo "Ese jugador nunca jugo una partida!\n";
+//                 echo "Ingrese un nombre diferente por favor: ";
+//                 $nombreJugador = strtoupper(trim(fgets(STDIN)));} 
+//         }
+//     }
+//     //esto tiene que devolverse en ese arreglo
+//     $resumenJuego= ["nombreJugador"=>$nombreJugador, "juegosGandos"=>$partidosGanados ,"juegosPerdidos"=>$partidosPerdidos ,"juegosEmpatados"=>$partidosEmpatados ,"puntosAcumulados"=>$puntosAcumulados];  
+//     return $resumenJuego;
+// }
+
+
 
 /**
  * A partir de la colleccion de juegos, ordena los juegos
@@ -349,7 +444,7 @@ do {
                 break;
             case 5: 
                 //Muestra resumen de un jugador.
-        
+                resumenJugador($coleccionDeJuegos);
                 break;
             case 6: 
                 //Muestra listado de juegos ordenados por jugador "0".
