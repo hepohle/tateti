@@ -42,7 +42,7 @@ function cargarJuegos(){
     $juego2 = [
         "nombreJugadorX"=> "ALBERTO",
         "nombreJugadorO"=> "KRISTINA",
-        "puntosObtenidosX"=> -1,
+        "puntosObtenidosX"=> 1,
         "puntosObtenidosO"=> 2];
 
     $juego3 = [
@@ -226,16 +226,24 @@ function primerJuegoGanado($juegos){
     echo "Ingrese el nombre del jugador: ";
     $nombreJugador = strtoupper(trim(fgets(STDIN)));
     
-    foreach ($juegos as $indice => $juego) {
-        if ($juego["nombreJugadorX"] == $nombreJugador && $juego["puntosObtenidosX"] > $juego["puntosObtenidosO"]){
-            $juegoGanado = $juego;
-        }elseif ($juego["nombreJugadorO"] == $nombreJugador && $juego["puntosObtenidosO"] > $juego["puntosObtenidosX"]) {
-            $juegoGanado = $juego;
-        }else {
-            $juegoGanado = [];
+    $n = count($juegos);
+    $i=0;
+    $indice = -1;
+    while ($i < $n) {
+        if ($juegos[$i]["nombreJugadorX"] == $nombreJugador){
+            if (resultadoJuego($juegos[$i]) == "GANO JUGADOR X"){
+                $indice = $i;
+                
+            }
+        }elseif ($juegos[$i]["nombreJugadorO"] == $nombreJugador) {
+            if (resultadoJuego($juegos[$i]) == "GANO JUGADOR O") {
+                $indice = $i;
+
+            }   
         }
+        $i++;
     }
-    return $juegoGanado;
+    return $indice;
 }
 
 /**
@@ -328,7 +336,7 @@ function resumenJugador($juegos){
 //                     //llamar a la funcion, que determina quien gano X o O
 //                     $resultado = resultadoJuego($datos);/*se envian por parametro los $datos */
 //                     //llama a la funcion determinarPuntos, para que determine los puntos (gano, perdio, empate)
-//                     if ($resultado = "GANO JUGADOR X"){
+//                     if ($resultado == "GANO JUGADOR X"){
 //                         $partidosGanados =  $partidosGanados + 1;
 //                         $puntosAcumulados = $puntosAcumulados+$datos["puntosObtenidosX"];
 //                     }elseif ($resultado = "GANO JUGADOR O"){
@@ -337,10 +345,10 @@ function resumenJugador($juegos){
 //                         $partidosEmpatados=$partidosEmpatados + 1;
 //                     }
 //                 }
-//                 else($posicionDatosJuego == "nombreJugadorO")
+//                 elseif($posicionDatosJuego == "nombreJugadorO")
 //                 {
 //                     $resultado = resultadoJuego($datos);
-//                     if ($resultado = "GANO JUGADOR O"){
+//                     if ($resultado == "GANO JUGADOR O"){
 //                         $partidosGanados =  $partidosGanados + 1;
 //                         $puntosAcumulados = $puntosAcumulados+ $datos["puntosObtenidosO"];
 //                     }elseif ($resultado = "GANO JUGADOR X"){
@@ -367,7 +375,7 @@ function resumenJugador($juegos){
  * A partir de la colleccion de juegos, ordena los juegos
  */
 function ordenarPorO($juegos){
-    foreach ($juegos as $indice => $juego) {
+    foreach ($juegos as $juego) {
         
     }
 }
@@ -438,13 +446,17 @@ do {
                 break;
             case 3: 
                 //Muestra el primer juego ganador, a partir del nombre del jugador.
-                $juegoGanador = primerJuegoGanado($coleccionDeJuegos);
-                print_r($juegoGanador);
-                // if ($juegoGanador == []) {
-                //     echo "Ese jugador no ha gando ningún juego aún.\n";
-                // }else{
-                //     echo $juegoGanador;
-                // }
+                $i = primerJuegoGanado($coleccionDeJuegos);
+                if ($i == -1) {
+                    echo "******************************\n";
+                    echo "Este jugador no ganó ningún juego todavía\n";
+                    echo "******************************\n";
+                }else {
+                    echo "******************************\n";
+                    echo "El jugador ganó el juego " . $i . "\n";
+                    echo "******************************\n";
+                }
+
                 break;
             case 4: 
                 //Muestra el porcentaje de juegos ganados de "X" o "0".
