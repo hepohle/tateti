@@ -279,7 +279,10 @@ function mostrarResumen($jugador){
     }  
 }
 
-
+/**
+ * compara dos valores y los ordena en forma ascendente.
+ * @param string
+ */
 function cmp($a, $b) {
     if ($a["nombreJugadorO"] == $b["nombreJugadorO"]) {
         return 0;
