@@ -279,26 +279,34 @@ function mostrarResumen($jugador){
     }  
 }
 
+
+function cmp($a, $b) {
+    if ($a["nombreJugadorO"] == $b["nombreJugadorO"]) {
+        return 0;
+    }
+    return ($a["nombreJugadorO"] < $b["nombreJugadorO"]) ? -1 : 1;
+}
 /**
  * A partir de la colleccion de juegos, ordena los juegos
  * @param array $juegos
  */
-function ordenarPorO($coleccion)
+function ordenarPorO($coleccionDeJuegos)
 {
-    
-    foreach($coleccion as $juego)
-    {
+    uasort($coleccionDeJuegos, "cmp");
+    print_r($coleccionDeJuegos);
+    // foreach($coleccion as $juego)
+    // {
      
-        foreach($juego as $indice => $elemento)
-        {
-            if($indice=="nombreJugadorO")
-            {
-                echo $indice." ".$elemento;
-                echo"\n";
+    //     foreach($juego as $indice => $elemento)
+    //     {
+    //         if($indice=="nombreJugadorO")
+    //         {
+    //             echo $indice." ".$elemento;
+    //             echo"\n";
                 
-            }
-        }        
-    }
+    //         }
+    //     }        
+    // }
 
 }
 
