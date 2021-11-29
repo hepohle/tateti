@@ -281,7 +281,7 @@ function resumenJugador($juegos){
     $partidosPerdidos = 0;
     $partidosEmpatados = 0;
     $puntosAcumulados = 0;
-
+    $jugador =[];
     foreach ($juegos as $juego) {
         
             if($juego["nombreJugadorX"] == $nombreJugador){ 
@@ -311,21 +311,33 @@ function resumenJugador($juegos){
             }
         
     }
+
     $partidosJugados = $partidosGanados + $partidosPerdidos + $partidosEmpatados;
 
-    if ($partidosJugados == 0) {
+    $jugador =["nombre"=>$nombreJugador, "juegosGanados"=>$partidosGanados, "juegosPerdidos"=>$partidosPerdidos, "juegosEmpatados"=>$partidosEmpatados, "puntosAcumulados"=>$puntosAcumulados, "partidosJugados"=>$partidosJugados];
+
+    return $jugador;  
+}
+
+/**
+ * Recibe el array jugador y muestra el resumen.
+ * @param array $jugador
+ */
+function mostrarResumen($jugador){
+
+    if ($jugador["partidosJugados"] == 0) {
         echo "******************************\n";
         echo "Ese jugador todavía no jugó ningun partido.\n";
         echo "******************************\n";
     }else {
         echo "******************************\n";
-        echo "JUGADOR: " . $nombreJugador . "\n";
-        echo "Gano: " . $partidosGanados . " juegos.\n";
-        echo "Perdió: " . $partidosPerdidos . " juegos.\n";
-        echo "Empató: " . $partidosEmpatados . " juegos.\n";
-        echo "Total de puntos acumulados: " . $puntosAcumulados . " puntos. \n";
+        echo "JUGADOR: " . $jugador["nombre"] . "\n";
+        echo "Gano: " . $jugador["juegosGanados"] . " juegos.\n";
+        echo "Perdió: " . $jugador["juegosPerdidos"] . " juegos.\n";
+        echo "Empató: " . $jugador["juegosEmpatados"] . " juegos.\n";
+        echo "Total de puntos acumulados: " . $jugador["puntosAcumulados"] . " puntos. \n";
         echo "******************************\n";
-    }    
+    }  
 }
 
 /**
@@ -419,7 +431,7 @@ do {
                 break;
             case 5: 
                 //Muestra resumen de un jugador.
-                resumenJugador($coleccionDeJuegos);
+                mostrarResumen(resumenJugador($coleccionDeJuegos));
                 break;
             case 6: 
                 //Muestra listado de juegos ordenados por jugador "0".
