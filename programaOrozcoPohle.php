@@ -31,7 +31,7 @@ function cargarJuegos(){
     //array juegos cargados
 
     $juego1 = ["nombreJugadorX"=> "IVAN","nombreJugadorO"=> "HECTOR","puntosObtenidosX"=> 1,"puntosObtenidosO"=> 1];
-    $juego2 = ["nombreJugadorX"=> "MAJO","nombreJugadorO"=> "SANDRA", "puntosObtenidosX"=> -1,"puntosObtenidosO"=> 2];
+    $juego2 = ["nombreJugadorX"=> "MAJO","nombreJugadorO"=> "SANDRA", "puntosObtenidosX"=> 1,"puntosObtenidosO"=> 2];
     $juego3 = ["nombreJugadorX"=> "MAJO","nombreJugadorO"=> "SANDRA","puntosObtenidosX"=> 5,"puntosObtenidosO"=> 3];
     $juego4 = ["nombreJugadorX"=> "MARIA","nombreJugadorO"=> "JOSE","puntosObtenidosX"=> 3,"puntosObtenidosO"=> 3];
     $juego5 = ["nombreJugadorX"=> "DEBY","nombreJugadorO"=> "KAREN","puntosObtenidosX"=> 6,"puntosObtenidosO"=> 3];
@@ -78,11 +78,8 @@ function resultadoJuego($juego){
  * @param array $coleccionJuegos
  * 
  */
-function mostrarJuego($coleccionDeJuegos){
+function mostrarJuego($coleccionDeJuegos, $num){
     $cantidadDeJuegos = count($coleccionDeJuegos);
-    
-    echo "Ingrese el numero del juego que desea ver: ";
-    $num=trim(fgets(STDIN));
 
     $resultado = resultadoJuego($coleccionDeJuegos[$num]);
 
@@ -256,9 +253,7 @@ function resumenJugador($juegos){
         
     }
 
-    $partidosJugados = $partidosGanados + $partidosPerdidos + $partidosEmpatados;
-
-    $jugador =["nombre"=>$nombreJugador, "juegosGanados"=>$partidosGanados, "juegosPerdidos"=>$partidosPerdidos, "juegosEmpatados"=>$partidosEmpatados, "puntosAcumulados"=>$puntosAcumulados, "partidosJugados"=>$partidosJugados];
+    $jugador =["nombre"=>$nombreJugador, "juegosGanados"=>$partidosGanados, "juegosPerdidos"=>$partidosPerdidos, "juegosEmpatados"=>$partidosEmpatados, "puntosAcumulados"=>$puntosAcumulados];
 
     return $jugador;  
 }
@@ -268,8 +263,8 @@ function resumenJugador($juegos){
  * @param array $jugador
  */
 function mostrarResumen($jugador){
-
-    if ($jugador["partidosJugados"] == 0) {
+    $partidosJugados = $jugador["juegosGanados"] + $jugador["juegosPerdidos"] + $jugador["juegosEmpatados"];
+    if ($partidosJugados == 0) {
         echo "******************************\n";
         echo "Ese jugador todavía no jugó ningun partido.\n";
         echo "******************************\n";
@@ -312,12 +307,11 @@ function ordenarPorO($coleccion)
  * @param array $juegos
  * @return int
  */
-function porcentajeGanados($juegos){
+function porcentajeGanados($juegos, $simbolo){
     $juegosPorSimbolo = 0;
     $total = count($juegos);
-    $simbolo = simboloElegido();
     
-    foreach ($juegos as $indice => $juego) {
+    foreach ($juegos as  $juego) {
         if ($simbolo == "X"){
             if (resultadoJuego($juego) == "GANO JUGADOR X") {
                 $juegosPorSimbolo ++;
@@ -330,7 +324,9 @@ function porcentajeGanados($juegos){
         }
     }
     $porcentaje = ($juegosPorSimbolo * 100) / $total;
+    echo "******************************\n";
     echo "El porcentaje de juegos ganador por " . $simbolo . " es " . $porcentaje . "%\n";
+    echo "******************************\n";
 }
 
 /**************************************/
@@ -362,7 +358,9 @@ do {
                 break;
             case 2: 
                 //Muesttra un juego a partir de un numero ingresado.
-                $juegoElegido = mostrarJuego($coleccionDeJuegos);
+                echo "Ingrese el numero del juego que desea ver: ";
+                $num=trim(fgets(STDIN)); 
+                mostrarJuego($coleccionDeJuegos ,$num);
                 break;
             case 3: 
                 //Muestra el primer juego ganador, a partir del nombre del jugador.
@@ -370,7 +368,8 @@ do {
                 break;
             case 4: 
                 //Muestra el porcentaje de juegos ganados de "X" o "0".
-                porcentajeGanados($coleccionDeJuegos);
+                $simbolo = simboloElegido();
+                porcentajeGanados($coleccionDeJuegos, $simbolo);
                 break;
             case 5: 
                 //Muestra resumen de un jugador.
