@@ -249,17 +249,24 @@ function primerJuegoGanado($juegos){
         }
         $i++;
     }
+    return $indice;
+}
 
-    if ($i == -1) {
+/**
+ * Toma el indice que devuelve primerJuegoGanado y da el resultado
+ * @parm int $n
+ * 
+ */
+function juegoEncontrado($n){
+    if ($n == -1) {
         echo"\n******************************\n";
         echo "Este jugador no ganó ningún juego todavía\n";
         echo "******************************\n";
     }else {
         echo"\n******************************\n";
-        echo"El jugador " . $nombreJugador . " ganó el juego nº " . $i;
+        echo"El jugador ganó el juego nº " . $n+1;
         echo "\n******************************\n";
     }
-
 }
 
 /**
@@ -404,7 +411,7 @@ do {
                 break;
             case 3: 
                 //Muestra el primer juego ganador, a partir del nombre del jugador.
-                primerJuegoGanado($coleccionDeJuegos);
+                juegoEncontrado(primerJuegoGanado($coleccionDeJuegos));
                 break;
             case 4: 
                 //Muestra el porcentaje de juegos ganados de "X" o "0".
