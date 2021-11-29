@@ -251,12 +251,15 @@ function primerJuegoGanado($juegos){
     }
 
     if ($i == -1) {
-        $resultado = "\n******************************\nEste jugador no ganó ningún juego todavía\n******************************\n";
+        echo"\n******************************\n";
+        echo "Este jugador no ganó ningún juego todavía\n";
+        echo "******************************\n";
     }else {
-        $resultado = "\n******************************\nEl jugador " . $nombreJugador . " ganó el juego nº " . $i . "\n******************************\n";
+        echo"\n******************************\n";
+        echo"El jugador " . $nombreJugador . " ganó el juego nº " . $i;
+        echo "\n******************************\n";
     }
 
-    return $resultado;
 }
 
 /**
@@ -391,8 +394,9 @@ do {
                 $juego = jugar();
                 imprimirResultado($juego);
 
-                $coleccionDeJuegos = agregarJuego($coleccionDeJuegos, $juego);
-                print_r($coleccionDeJuegos);
+                // Agrega el juego jugado a la coleccion de juegos.
+                //$coleccionDeJuegos = agregarJuego($coleccionDeJuegos, $juego);
+                //print_r($coleccionDeJuegos);
                 break;
             case 2: 
                 //Muesttra un juego a partir de un numero ingresado.
@@ -400,8 +404,7 @@ do {
                 break;
             case 3: 
                 //Muestra el primer juego ganador, a partir del nombre del jugador.
-                $result = primerJuegoGanado($coleccionDeJuegos);
-                echo $result;
+                primerJuegoGanado($coleccionDeJuegos);
                 break;
             case 4: 
                 //Muestra el porcentaje de juegos ganados de "X" o "0".
