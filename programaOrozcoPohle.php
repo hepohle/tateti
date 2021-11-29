@@ -93,6 +93,12 @@ function cargarJuegos(){
         "puntosObtenidosX"=> 2,
         "puntosObtenidosO"=> 2];
 
+    $juego11 = [
+            "nombreJugadorX"=> "WALLY",
+            "nombreJugadorO"=> "MARTINA",
+            "puntosObtenidosX"=> 2,
+            "puntosObtenidosO"=> 6];
+
     $coleccionJuegos = [];
 
     $coleccionJuegos[0] = $juego1;
@@ -105,6 +111,7 @@ function cargarJuegos(){
     $coleccionJuegos[7] = $juego8;
     $coleccionJuegos[8] = $juego9;
     $coleccionJuegos[9] = $juego10;
+    $coleccionJuegos[10] = $juego11;
 
     return $coleccionJuegos;
 };
@@ -223,27 +230,33 @@ function cantidadGanados($juegos){
  * @return array
  */
 function primerJuegoGanado($juegos){
-    echo "Ingrese el nombre del jugador: ";
+    echo "Ingrese el nombre del jugador: \n";
     $nombreJugador = strtoupper(trim(fgets(STDIN)));
     
     $n = count($juegos);
     $i=0;
     $indice = -1;
-    while ($i < $n) {
+
+    while ($i < $n && $indice==-1) {
         if ($juegos[$i]["nombreJugadorX"] == $nombreJugador){
             if (resultadoJuego($juegos[$i]) == "GANO JUGADOR X"){
                 $indice = $i;
-                
             }
         }elseif ($juegos[$i]["nombreJugadorO"] == $nombreJugador) {
             if (resultadoJuego($juegos[$i]) == "GANO JUGADOR O") {
                 $indice = $i;
-
             }   
         }
         $i++;
     }
-    return $indice;
+
+    if ($i == -1) {
+        $resultado = "\n******************************\nEste jugador no ganó ningún juego todavía\n******************************\n";
+    }else {
+        $resultado = "\n******************************\nEl jugador " . $nombreJugador . " ganó el juego nº " . $i . "\n******************************\n";
+    }
+
+    return $resultado;
 }
 
 /**
@@ -305,79 +318,27 @@ function resumenJugador($juegos){
     }    
 }
 
-// /**
-//  * A partir de la coleccion de juegos se pide un nombre de un jugador y se devuelve su resumen.
-//  * @param array $coleccionJuegos
-//  */
-// function resumenJugador($coleccionJuegos)
-// {
-//     echo "ingrese el nombre del jugador: ";
-//     $nombreJugador = strtoupper(trim(fgets(STDIN)));
-
-//     $partidosGanados = 0;
-//     $partidosPerdidos = 0;
-//     $partidosEmpatados = 0;
-//     $puntosAcumulados = 0;
-
-//     //recorre el array $coleecionJuegos , vuelca todos los arreglos en $juegos
-//     foreach($coleccionJuegos as $juegos)
-//     {
-//         /*recorre  el array $juegos
-//         que serian los valores de los mismos valores que el array principal
-//         $juegos("nombreJugadorX","nombreJugadorO","puntosObtenidosX","puntosObtenidosO")
-//         esos valores de juego los vuelca en $datos*/ 
-//         foreach($juegos as  $posicionDatosJuego => $datos)/* toma la posicion del array y el dato en esa posicion*/
-//         {
-//             //comparar si el nombre ingresado por el usario es el mismo del arreglo
-//             if($datos==$nombreJugador)
-//             {
-//                 if($posicionDatosJuego == "nombreJugadorX")
-//                 {
-//                     //llamar a la funcion, que determina quien gano X o O
-//                     $resultado = resultadoJuego($datos);/*se envian por parametro los $datos */
-//                     //llama a la funcion determinarPuntos, para que determine los puntos (gano, perdio, empate)
-//                     if ($resultado == "GANO JUGADOR X"){
-//                         $partidosGanados =  $partidosGanados + 1;
-//                         $puntosAcumulados = $puntosAcumulados+$datos["puntosObtenidosX"];
-//                     }elseif ($resultado = "GANO JUGADOR O"){
-//                         $partidosPerdidos = $partidosPerdidos + 1;
-//                     }else{
-//                         $partidosEmpatados=$partidosEmpatados + 1;
-//                     }
-//                 }
-//                 elseif($posicionDatosJuego == "nombreJugadorO")
-//                 {
-//                     $resultado = resultadoJuego($datos);
-//                     if ($resultado == "GANO JUGADOR O"){
-//                         $partidosGanados =  $partidosGanados + 1;
-//                         $puntosAcumulados = $puntosAcumulados+ $datos["puntosObtenidosO"];
-//                     }elseif ($resultado = "GANO JUGADOR X"){
-//                         $partidosPerdidos = $partidosPerdidos + 1;
-//                     }else{
-//                         $partidosEmpatados=$partidosEmpatados + 1;
-//                     }
-//                 }
-        
-//             }else{
-//                 echo "Ese jugador nunca jugo una partida!\n";
-//                 echo "Ingrese un nombre diferente por favor: ";
-//                 $nombreJugador = strtoupper(trim(fgets(STDIN)));} 
-//         }
-//     }
-//     //esto tiene que devolverse en ese arreglo
-//     $resumenJuego= ["nombreJugador"=>$nombreJugador, "juegosGandos"=>$partidosGanados ,"juegosPerdidos"=>$partidosPerdidos ,"juegosEmpatados"=>$partidosEmpatados ,"puntosAcumulados"=>$puntosAcumulados];  
-//     return $resumenJuego;
-// }
-
-
-
 /**
  * A partir de la colleccion de juegos, ordena los juegos
+ * @param array $juegos
  */
-function ordenarPorO($juegos){
-    foreach ($juegos as $juego) {
-        
+function ordenarPorO($coleccion)
+{
+    
+    foreach($coleccion as $juego)
+    {
+     
+        foreach($juego as $indice => $elemento)
+        {
+            if($indice=="nombreJugadorO")
+            {
+                echo $indice." ".$elemento;
+                echo"\n";
+                
+            }
+        }        
     }
+
 }
 
 /**
@@ -411,10 +372,6 @@ function porcentajeGanados($juegos){
 /*********** PROGRAMA PRINCIPAL *******/
 /**************************************/
 
-//Declaración de variables:
-
-//Inicialización de variables:
-
 // Carga la collecion de 10 juegos
 $coleccionDeJuegos = cargarJuegos();
 
@@ -423,9 +380,6 @@ $min = 1;
 $max = 7;
 
 //Proceso:
-
-// $juego = jugar();
-// print_r($juego);
 
 do {
     // Opcion del menu
@@ -446,17 +400,8 @@ do {
                 break;
             case 3: 
                 //Muestra el primer juego ganador, a partir del nombre del jugador.
-                $i = primerJuegoGanado($coleccionDeJuegos);
-                if ($i == -1) {
-                    echo "******************************\n";
-                    echo "Este jugador no ganó ningún juego todavía\n";
-                    echo "******************************\n";
-                }else {
-                    echo "******************************\n";
-                    echo "El jugador ganó el juego " . $i . "\n";
-                    echo "******************************\n";
-                }
-
+                $result = primerJuegoGanado($coleccionDeJuegos);
+                echo $result;
                 break;
             case 4: 
                 //Muestra el porcentaje de juegos ganados de "X" o "0".
@@ -468,7 +413,7 @@ do {
                 break;
             case 6: 
                 //Muestra listado de juegos ordenados por jugador "0".
-                
+                ordenarPorO($coleccionDeJuegos);
                 break;
         }
 }
