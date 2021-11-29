@@ -4,10 +4,6 @@ include_once("tateti.php");
 /**************************************/
 /***** DATOS DE LOS INTEGRANTES *******/
 /**************************************/
-
-/* Apellido, Nombre. Legajo. Carrera. mail. Usuario Github */
-/* ... COMPLETAR ... */
-
 // Técnicatura Universitaria en desarrollo web.
 
 // Orozco Iván FAI 3699
@@ -25,7 +21,7 @@ include_once("tateti.php");
 // Carga un array con diez juegos.
 /**
  * Inicializa la estructura de datos de la coleccion de juegos.
- * @return array $coleccionJuegos
+ * @return array 
  */
 function cargarJuegos(){
     //array juegos cargados
@@ -76,7 +72,7 @@ function resultadoJuego($juego){
 /**
  * Pide al usuario un numero de juego y muestra su resumen.
  * @param array $coleccionJuegos
- * 
+ * @param int $num
  */
 function mostrarJuego($coleccionDeJuegos, $num){
     $cantidadDeJuegos = count($coleccionDeJuegos);
@@ -99,7 +95,7 @@ function mostrarJuego($coleccionDeJuegos, $num){
 /**
  * Le pide al usuario un número dentro del rango de las opciones del menu.
  * Se llama a la funcion solicitarNumeroEntre() del archivo tateti.php
- * @return int $opcion.
+ * @return int 
  */
 function seleccionarOpcion(){
     $min = 1;
@@ -122,7 +118,7 @@ function seleccionarOpcion(){
  * Recibe un array con la coleccion de juegos y un juego nuevo.
  * @param array $coleccionDeJuegos
  * @param array $nuevoJuego
- * @return array $coleccionDeJuegos
+ * @return array 
  */
 function agregarJuego($coleccionDeJuegos, $nuevoJuego){
     $ultimoIndice = count($coleccionDeJuegos);
@@ -166,8 +162,8 @@ function cantidadGanados($juegos){
 
 /**
  * Muestra el primer juego ganado a partir del nombre del jugador
- * @return array
- * @return int $indice
+ * @param array $juego
+ * @return int 
  */
 function primerJuegoGanado($juegos){
     echo "Ingrese el nombre del jugador: \n";
@@ -194,7 +190,7 @@ function primerJuegoGanado($juegos){
 
 /**
  * Toma el número que devuelve primerJuegoGanado (indice del juego encontrado o -1) y muestra el resultado.
- * @parm int $n
+ * @param int $n
  * 
  */
 function juegoEncontrado($n){
@@ -244,11 +240,7 @@ function resumenJugador($juegos){
                 }else {
                     $partidosEmpatados ++;
                     $puntosAcumulados = $puntosAcumulados + $juego["puntosCirculo"];
-                }
-            // }elseif ($juego["jugadorCruz"] <> $nombreJugador) {
-            //      echo "Ese jugador no jugó todavía.\n";
-            //      echo "ingrese el nombre del jugador: ";
-            //      $nombreJugador = strtoupper(trim(fgets(STDIN))); 
+                } 
             }
         
     }
@@ -281,7 +273,7 @@ function mostrarResumen($jugador){
 
 /**
  * compara dos valores y los ordena en forma ascendente.
- * @param string
+ * @param string $a, $b
  */
 function cmp($a, $b) {
     if ($a["jugadorCirculo"] == $b["jugadorCirculo"]) {
@@ -291,31 +283,19 @@ function cmp($a, $b) {
 }
 /**
  * A partir de la colleccion de juegos, ordena los juegos
- * @param array $juegos
+ * @param array $ColeccionDeJuegos
  */
 function ordenarPorO($coleccionDeJuegos)
 {
     uasort($coleccionDeJuegos, "cmp");
     print_r($coleccionDeJuegos);
-    // foreach($coleccion as $juego)
-    // {
-     
-    //     foreach($juego as $indice => $elemento)
-    //     {
-    //         if($indice=="jugadorCirculo")
-    //         {
-    //             echo $indice." ".$elemento;
-    //             echo"\n";
-                
-    //         }
-    //     }        
-    // }
-
+  
 }
 
 /**
  * Pide un simbolo (X ó O) y recorre la coleccion de juegos, devuelve el porcentaje de juegos ganados.
  * @param array $juegos
+ * @param String $simbolo
  * @return int
  */
 function porcentajeGanados($juegos, $simbolo){
