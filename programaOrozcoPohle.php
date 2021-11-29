@@ -33,71 +33,16 @@ include_once("tateti.php");
 function cargarJuegos(){
     //array juegos cargados
 
-    $juego1 = [
-    "nombreJugadorX"=> "JUANCHI",
-    "nombreJugadorO"=> "ANA",
-    "puntosObtenidosX"=> 1,
-    "puntosObtenidosO"=> 1];
-
-    $juego2 = [
-        "nombreJugadorX"=> "ALBERTO",
-        "nombreJugadorO"=> "KRISTINA",
-        "puntosObtenidosX"=> 1,
-        "puntosObtenidosO"=> 2];
-
-    $juego3 = [
-        "nombreJugadorX"=> "MAJO",
-        "nombreJugadorO"=> "PEPE",
-        "puntosObtenidosX"=> 5,
-        "puntosObtenidosO"=> 3];
-
-    $juego4 = [
-        "nombreJugadorX"=> "MARIA",
-        "nombreJugadorO"=> "JOSE",
-        "puntosObtenidosX"=> 3,
-        "puntosObtenidosO"=> 3];
-
-    $juego5 = [
-        "nombreJugadorX"=> "DEBY",
-        "nombreJugadorO"=> "KAREN",
-        "puntosObtenidosX"=> 6,
-        "puntosObtenidosO"=> 3];
-
-    $juego6 = [
-        "nombreJugadorX"=> "WALTER",
-        "nombreJugadorO"=> "MARTINA",
-        "puntosObtenidosX"=> 2,
-        "puntosObtenidosO"=> 4];
-
-    $juego7 = [
-        "nombreJugadorX"=> "ALICIA",
-        "nombreJugadorO"=> "DORA",
-        "puntosObtenidosX"=> 7,
-        "puntosObtenidosO"=> 2];
-        
-    $juego8 = [
-        "nombreJugadorX"=> "HECTOR",
-        "nombreJugadorO"=> "LUIS",
-        "puntosObtenidosX"=> 1,
-        "puntosObtenidosO"=> 2];
-    
-    $juego9 = [
-        "nombreJugadorX"=> "MANUEL",
-        "nombreJugadorO"=> "JOSE",
-        "puntosObtenidosX"=> 10,
-        "puntosObtenidosO"=> 4];
-
-    $juego10 = [
-        "nombreJugadorX"=> "LEONARDO",
-        "nombreJugadorO"=> "IVAN",
-        "puntosObtenidosX"=> 2,
-        "puntosObtenidosO"=> 2];
-
-    $juego11 = [
-            "nombreJugadorX"=> "WALLY",
-            "nombreJugadorO"=> "MARTINA",
-            "puntosObtenidosX"=> 2,
-            "puntosObtenidosO"=> 6];
+    $juego1 = ["nombreJugadorX"=> "IVAN","nombreJugadorO"=> "HECTOR","puntosObtenidosX"=> 1,"puntosObtenidosO"=> 1];
+    $juego2 = ["nombreJugadorX"=> "MAJO","nombreJugadorO"=> "SANDRA", "puntosObtenidosX"=> -1,"puntosObtenidosO"=> 2];
+    $juego3 = ["nombreJugadorX"=> "MAJO","nombreJugadorO"=> "SANDRA","puntosObtenidosX"=> 5,"puntosObtenidosO"=> 3];
+    $juego4 = ["nombreJugadorX"=> "MARIA","nombreJugadorO"=> "JOSE","puntosObtenidosX"=> 3,"puntosObtenidosO"=> 3];
+    $juego5 = ["nombreJugadorX"=> "DEBY","nombreJugadorO"=> "KAREN","puntosObtenidosX"=> 6,"puntosObtenidosO"=> 3];
+    $juego6 = ["nombreJugadorX"=> "HECTOR","nombreJugadorO"=> "MAJO","puntosObtenidosX"=> 2,"puntosObtenidosO"=> 4];
+    $juego7 = ["nombreJugadorX"=> "IVAN","nombreJugadorO"=> "ALICIA","puntosObtenidosX"=> 7,"puntosObtenidosO"=> 2];
+    $juego8 = ["nombreJugadorX"=> "HECTOR","nombreJugadorO"=> "LUIS","puntosObtenidosX"=> 1,"puntosObtenidosO"=> 2];
+    $juego9 = ["nombreJugadorX"=> "SANDRA","nombreJugadorO"=> "JOSE","puntosObtenidosX"=> 10,"puntosObtenidosO"=> 4];
+    $juego10 = ["nombreJugadorX"=> "LEONARDO","nombreJugadorO"=> "IVAN","puntosObtenidosX"=> 2,"puntosObtenidosO"=> 2];
 
     $coleccionJuegos = [];
 
