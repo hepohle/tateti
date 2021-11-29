@@ -30,16 +30,16 @@ include_once("tateti.php");
 function cargarJuegos(){
     //array juegos cargados
 
-    $juego1 = ["nombreJugadorX"=> "IVAN","nombreJugadorO"=> "HECTOR","puntosObtenidosX"=> 1,"puntosObtenidosO"=> 1];
-    $juego2 = ["nombreJugadorX"=> "MAJO","nombreJugadorO"=> "SANDRA", "puntosObtenidosX"=> 1,"puntosObtenidosO"=> 2];
-    $juego3 = ["nombreJugadorX"=> "MAJO","nombreJugadorO"=> "SANDRA","puntosObtenidosX"=> 5,"puntosObtenidosO"=> 3];
-    $juego4 = ["nombreJugadorX"=> "MARIA","nombreJugadorO"=> "JOSE","puntosObtenidosX"=> 3,"puntosObtenidosO"=> 3];
-    $juego5 = ["nombreJugadorX"=> "DEBY","nombreJugadorO"=> "KAREN","puntosObtenidosX"=> 6,"puntosObtenidosO"=> 3];
-    $juego6 = ["nombreJugadorX"=> "HECTOR","nombreJugadorO"=> "MAJO","puntosObtenidosX"=> 2,"puntosObtenidosO"=> 4];
-    $juego7 = ["nombreJugadorX"=> "IVAN","nombreJugadorO"=> "ALICIA","puntosObtenidosX"=> 7,"puntosObtenidosO"=> 2];
-    $juego8 = ["nombreJugadorX"=> "HECTOR","nombreJugadorO"=> "LUIS","puntosObtenidosX"=> 1,"puntosObtenidosO"=> 2];
-    $juego9 = ["nombreJugadorX"=> "SANDRA","nombreJugadorO"=> "JOSE","puntosObtenidosX"=> 10,"puntosObtenidosO"=> 4];
-    $juego10 = ["nombreJugadorX"=> "LEONARDO","nombreJugadorO"=> "IVAN","puntosObtenidosX"=> 2,"puntosObtenidosO"=> 2];
+    $juego1 = ["jugadorCruz"=> "IVAN","jugadorCirculo"=> "HECTOR","puntosCruz"=> 1,"puntosCirculo"=> 1];
+    $juego2 = ["jugadorCruz"=> "MAJO","jugadorCirculo"=> "SANDRA", "puntosCruz"=> 1,"puntosCirculo"=> 2];
+    $juego3 = ["jugadorCruz"=> "MAJO","jugadorCirculo"=> "SANDRA","puntosCruz"=> 5,"puntosCirculo"=> 3];
+    $juego4 = ["jugadorCruz"=> "MARIA","jugadorCirculo"=> "JOSE","puntosCruz"=> 3,"puntosCirculo"=> 3];
+    $juego5 = ["jugadorCruz"=> "DEBY","jugadorCirculo"=> "KAREN","puntosCruz"=> 6,"puntosCirculo"=> 3];
+    $juego6 = ["jugadorCruz"=> "HECTOR","jugadorCirculo"=> "MAJO","puntosCruz"=> 2,"puntosCirculo"=> 4];
+    $juego7 = ["jugadorCruz"=> "IVAN","jugadorCirculo"=> "ALICIA","puntosCruz"=> 7,"puntosCirculo"=> 2];
+    $juego8 = ["jugadorCruz"=> "HECTOR","jugadorCirculo"=> "LUIS","puntosCruz"=> 1,"puntosCirculo"=> 2];
+    $juego9 = ["jugadorCruz"=> "SANDRA","jugadorCirculo"=> "JOSE","puntosCruz"=> 10,"puntosCirculo"=> 4];
+    $juego10 = ["jugadorCruz"=> "LEONARDO","jugadorCirculo"=> "IVAN","puntosCruz"=> 2,"puntosCirculo"=> 2];
 
     $coleccionJuegos = [];
 
@@ -63,9 +63,9 @@ function cargarJuegos(){
  * @return string
  */
 function resultadoJuego($juego){
-    if ($juego["puntosObtenidosX"] > $juego["puntosObtenidosO"]) {
+    if ($juego["puntosCruz"] > $juego["puntosCirculo"]) {
         $resultado = "GANO JUGADOR X";
-    } elseif ($juego["puntosObtenidosX"] < $juego["puntosObtenidosO"]) {
+    } elseif ($juego["puntosCruz"] < $juego["puntosCirculo"]) {
         $resultado = "GANO JUGADOR O";
     } else {
         $resultado = "EMPATE";
@@ -86,8 +86,8 @@ function mostrarJuego($coleccionDeJuegos, $num){
     if ($num >=0 && $num <= $cantidadDeJuegos){
         echo "******************************\n";
         echo "JUEGO TATETI N°: ".$num." " . "(".$resultado.")" ."\n";
-        echo "JUGADOR X: ".$coleccionDeJuegos[$num]["nombreJugadorX"]." obtuvo ".$coleccionDeJuegos[$num]["puntosObtenidosX"]." punto."."\n";
-        echo "JUGADOR O: ".$coleccionDeJuegos[$num]["nombreJugadorO"]." obtuvo ".$coleccionDeJuegos[$num]["puntosObtenidosO"]." punto."."\n";
+        echo "JUGADOR X: ".$coleccionDeJuegos[$num]["jugadorCruz"]." obtuvo ".$coleccionDeJuegos[$num]["puntosCruz"]." punto."."\n";
+        echo "JUGADOR O: ".$coleccionDeJuegos[$num]["jugadorCirculo"]." obtuvo ".$coleccionDeJuegos[$num]["puntosCirculo"]." punto."."\n";
         echo "******************************\n";
     }else{
         echo"Error, ese juego no existe!\n";
@@ -113,7 +113,7 @@ function seleccionarOpcion(){
             6)- MOSTRAR LISTADO DE JUEGOS ORDENADOS POR 0.\n
             7)- SALIR. \n";
     
-    $opcion = solicitarNumeroEntre($min, $max);
+    $opcion = solicitarNumeroEntre(1, 7);
     
     return $opcion;
 }
@@ -157,7 +157,7 @@ function simboloElegido(){
 function cantidadGanados($juegos){
     $juegosGanados = 0;
     foreach ($juegos as $indice => $juego) {
-        if($juego["puntosObtenidosX"] <> $juego["puntosObtenidosO"]){
+        if($juego["puntosCruz"] <> $juego["puntosCirculo"]){
                     $juegosGanados ++;
         }
     }
@@ -178,11 +178,11 @@ function primerJuegoGanado($juegos){
     $indice = -1;
 
     while ($i < $n && $indice==-1) {
-        if ($juegos[$i]["nombreJugadorX"] == $nombreJugador){
+        if ($juegos[$i]["jugadorCruz"] == $nombreJugador){
             if (resultadoJuego($juegos[$i]) == "GANO JUGADOR X"){
                 $indice = $i;
             }
-        }elseif ($juegos[$i]["nombreJugadorO"] == $nombreJugador) {
+        }elseif ($juegos[$i]["jugadorCirculo"] == $nombreJugador) {
             if (resultadoJuego($juegos[$i]) == "GANO JUGADOR O") {
                 $indice = $i;
             }   
@@ -225,27 +225,27 @@ function resumenJugador($juegos){
     $jugador =[];
     foreach ($juegos as $juego) {
         
-            if($juego["nombreJugadorX"] == $nombreJugador){ 
+            if($juego["jugadorCruz"] == $nombreJugador){ 
                 if (resultadoJuego($juego) == "GANO JUGADOR X"){ 
                     $partidosGanados ++;
-                    $puntosAcumulados = $puntosAcumulados + $juego["puntosObtenidosX"];
+                    $puntosAcumulados = $puntosAcumulados + $juego["puntosCruz"];
                 }elseif (resultadoJuego($juego) == "GANO JUGADOR O") {
                     $partidosPerdidos ++;    
                 }else {
                     $partidosEmpatados ++;
-                    $puntosAcumulados = $puntosAcumulados + $juego["puntosObtenidosX"];
+                    $puntosAcumulados = $puntosAcumulados + $juego["puntosCruz"];
                 }
-            }elseif ($juego["nombreJugadorO"] == $nombreJugador){
+            }elseif ($juego["jugadorCirculo"] == $nombreJugador){
                 if(resultadoJuego($juego) == "GANO JUGADOR O") {
                     $partidosGanados ++;
-                    $puntosAcumulados = $puntosAcumulados + $juego["puntosObtenidosO"];
+                    $puntosAcumulados = $puntosAcumulados + $juego["puntosCirculo"];
                 }elseif (resultadoJuego($juego) == "GANO JUGADOR X") {
                     $partidosPerdidos ++;
                 }else {
                     $partidosEmpatados ++;
-                    $puntosAcumulados = $puntosAcumulados + $juego["puntosObtenidosO"];
+                    $puntosAcumulados = $puntosAcumulados + $juego["puntosCirculo"];
                 }
-            // }elseif ($juego["nombreJugadorX"] <> $nombreJugador) {
+            // }elseif ($juego["jugadorCruz"] <> $nombreJugador) {
             //      echo "Ese jugador no jugó todavía.\n";
             //      echo "ingrese el nombre del jugador: ";
             //      $nombreJugador = strtoupper(trim(fgets(STDIN))); 
@@ -284,10 +284,10 @@ function mostrarResumen($jugador){
  * @param string
  */
 function cmp($a, $b) {
-    if ($a["nombreJugadorO"] == $b["nombreJugadorO"]) {
+    if ($a["jugadorCirculo"] == $b["jugadorCirculo"]) {
         return 0;
     }
-    return ($a["nombreJugadorO"] < $b["nombreJugadorO"]) ? -1 : 1;
+    return ($a["jugadorCirculo"] < $b["jugadorCirculo"]) ? -1 : 1;
 }
 /**
  * A partir de la colleccion de juegos, ordena los juegos
@@ -302,7 +302,7 @@ function ordenarPorO($coleccionDeJuegos)
      
     //     foreach($juego as $indice => $elemento)
     //     {
-    //         if($indice=="nombreJugadorO")
+    //         if($indice=="jugadorCirculo")
     //         {
     //             echo $indice." ".$elemento;
     //             echo"\n";
@@ -320,8 +320,8 @@ function ordenarPorO($coleccionDeJuegos)
  */
 function porcentajeGanados($juegos, $simbolo){
     $juegosPorSimbolo = 0;
-    $total = count($juegos);
     
+     $total = cantidadGanados($juegos);
     foreach ($juegos as  $juego) {
         if ($simbolo == "X"){
             if (resultadoJuego($juego) == "GANO JUGADOR X") {
@@ -336,7 +336,7 @@ function porcentajeGanados($juegos, $simbolo){
     }
     $porcentaje = ($juegosPorSimbolo * 100) / $total;
     echo "******************************\n";
-    echo "El porcentaje de juegos ganador por " . $simbolo . " es " . $porcentaje . "%\n";
+    echo "El porcentaje de juegos ganador por " . $simbolo . " es " . round($porcentaje, 2) . "%\n";
     echo "******************************\n";
 }
 
@@ -347,9 +347,6 @@ function porcentajeGanados($juegos, $simbolo){
 // Carga la collecion de 10 juegos
 $coleccionDeJuegos = cargarJuegos();
 
-//Valores del rango
-$min = 1;
-$max = 7;
 
 //Proceso:
 
@@ -368,7 +365,7 @@ do {
                 //print_r($coleccionDeJuegos);
                 break;
             case 2: 
-                //Muesttra un juego a partir de un numero ingresado.
+                //Muestra un juego a partir de un numero ingresado.
                 echo "Ingrese el numero del juego que desea ver: ";
                 $num=trim(fgets(STDIN)); 
                 mostrarJuego($coleccionDeJuegos ,$num);
