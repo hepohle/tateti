@@ -16,9 +16,6 @@ include_once("tateti.php");
 // Pohle Héctor FAI 3715
 // hector.pohle@est.fi.uncoma.edu.ar
 
-// Salto Tomás FAI
-// tomas.salto@est.fi.uncoma.edu.ar
-
 // https://github.com/hepohle/tateti
 
 /**************************************/
@@ -56,14 +53,14 @@ function cargarJuegos(){
     $coleccionJuegos[7] = $juego8;
     $coleccionJuegos[8] = $juego9;
     $coleccionJuegos[9] = $juego10;
-    $coleccionJuegos[10] = $juego11;
 
     return $coleccionJuegos;
 };
 
 /**
  * Calcula el resultado a partir de los puntos de cada jugador.
- * 
+ * @param array $juego
+ * @return string
  */
 function resultadoJuego($juego){
     if ($juego["puntosObtenidosX"] > $juego["puntosObtenidosO"]) {
@@ -158,7 +155,7 @@ function simboloElegido(){
 /**
  * Recibe la coleccion de juegos y devuelve la cantida de juegos ganados.
  * @param array $coleccionDeJuegos
- * 
+ * @return int 
  */
 function cantidadGanados($juegos){
     $juegosGanados = 0;
@@ -173,6 +170,7 @@ function cantidadGanados($juegos){
 /**
  * Muestra el primer juego ganado a partir del nombre del jugador
  * @return array
+ * @return int $indice
  */
 function primerJuegoGanado($juegos){
     echo "Ingrese el nombre del jugador: \n";
@@ -198,7 +196,7 @@ function primerJuegoGanado($juegos){
 }
 
 /**
- * Toma el indice que devuelve primerJuegoGanado y da el resultado
+ * Toma el número que devuelve primerJuegoGanado (indice del juego encontrado o -1) y muestra el resultado.
  * @parm int $n
  * 
  */
@@ -216,7 +214,8 @@ function juegoEncontrado($n){
 
 /**
  * A partir de la coleccion de juegos se pide un nombre de un jugador y se devuelve su resumen.
- * 
+ * @param array $juegos
+ * @return array $jugador
  */
 function resumenJugador($juegos){
     echo "ingrese el nombre del jugador: ";
@@ -310,6 +309,7 @@ function ordenarPorO($coleccion)
 
 /**
  * Pide un simbolo (X ó O) y recorre la coleccion de juegos, devuelve el porcentaje de juegos ganados.
+ * @param array $juegos
  * @return int
  */
 function porcentajeGanados($juegos){
@@ -332,8 +332,6 @@ function porcentajeGanados($juegos){
     $porcentaje = ($juegosPorSimbolo * 100) / $total;
     echo "El porcentaje de juegos ganador por " . $simbolo . " es " . $porcentaje . "%\n";
 }
-
-
 
 /**************************************/
 /*********** PROGRAMA PRINCIPAL *******/
